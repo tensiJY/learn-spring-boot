@@ -14,7 +14,9 @@ public class CourseController {
 		
 		return Arrays.asList(
 					new Course(1, "Learn AWS", "jyp"),
-					new Course(2, "Learn DevOps", "jyp")
+					new Course(2, "Learn DevOps", "jyp"),
+					new Course(3, "Learn Azure", "jyp"),
+					new Course(4, "Learn GCP", "jyp")
 				);
 	}
 	                                
