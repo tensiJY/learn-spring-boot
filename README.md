@@ -1,23 +1,30 @@
 # learn-spring-boot
 
 # branch
+
 1. init
+
 ```
 https://github.com/tensiJY/learn-spring-boot/tree/01_init
 ```
 
 2. devtools
+
 ```
 https://github.com/tensiJY/learn-spring-boot/tree/02_devtools
 ```
 
 3. profile & config
+
 ```
 https://github.com/tensiJY/learn-spring-boot/tree/03_profile
 ```
 
 <details>
+<summary> 설정 </summary>
+
 - pom.xml
+
 ```
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -27,6 +34,7 @@ https://github.com/tensiJY/learn-spring-boot/tree/03_profile
 ```
 
 - component
+
 ```
 @Component
 @ConfigurationProperties(prefix="currency-service")
@@ -35,9 +43,9 @@ public class CurrencyServiceConfiguration {
 	private String url;
 	private String username;
 	private String key;
-	
-	
-	
+
+
+
 	public String getUrl() {
 		return url;
 	}
@@ -58,11 +66,14 @@ public class CurrencyServiceConfiguration {
 	}
 }
 ```
+
 - properties
+
 ```
 # config properties
 currency-service.url=http://default1.in28minutes.com
 currency-service.username=defaultusername
 currency-service.key=defaultkey
 ```
+
 </details>
