@@ -90,7 +90,7 @@ clean install
 4. Spring boot actuator
 
 ```
-
+https://github.com/tensiJY/learn-spring-boot/tree/04_actuator
 ```
 
 <details>
