@@ -77,3 +77,12 @@ currency-service.key=defaultkey
 ```
 
 </details>
+
+<details>
+<summary> 빌드 </summary>
+
+```
+clean install
+```
+
+</details>
