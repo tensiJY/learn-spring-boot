@@ -86,3 +86,38 @@ clean install
 ```
 
 </details>
+
+4. Spring boot actuator
+
+```
+
+```
+
+<details>
+
+<summary>
+	설정
+</summary>
+
+- pom.xml
+
+```
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+- applications.properties
+
+```
+# actuator
+## http://localhost:8080/actuator
+#management.endpoints.web.exposure.include=*
+management.endpoints.web.exposure.include=health,metrics
+```
+
+- url
+  > http//localhost:8080/actuator
+
+</details>
