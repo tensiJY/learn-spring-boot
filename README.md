@@ -2,19 +2,19 @@
 
 # branch
 
-1. init
+## init
 
 ```
 https://github.com/tensiJY/learn-spring-boot/tree/01_init
 ```
 
-2. devtools
+## devtools
 
 ```
 https://github.com/tensiJY/learn-spring-boot/tree/02_devtools
 ```
 
-3. profile & config
+## profile & config
 
 ```
 https://github.com/tensiJY/learn-spring-boot/tree/03_profile
@@ -86,8 +86,9 @@ clean install
 ```
 
 </details>
+<br>
 
-4. Spring boot actuator
+## Spring boot actuator
 
 ```
 https://github.com/tensiJY/learn-spring-boot/tree/04_actuator
@@ -121,3 +122,16 @@ management.endpoints.web.exposure.include=health,metrics
   > http//localhost:8080/actuator
 
 </details>
+
+<br>
+
+## jpa
+
+```
+https://github.com/tensiJY/learn-spring-boot/tree/05_jpa
+```
+
+- jdbc
+- jpa
+- h2
+- web
