@@ -131,7 +131,5 @@ management.endpoints.web.exposure.include=health,metrics
 https://github.com/tensiJY/learn-spring-boot/tree/05_jpa
 ```
 
-- jdbc
-- jpa
-- h2
-- web
+- jdbc, jpa, h2, web, DevTools
+
