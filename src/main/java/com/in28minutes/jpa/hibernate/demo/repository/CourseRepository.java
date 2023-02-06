@@ -39,4 +39,28 @@ public class CourseRepository {
 		return course;
 	}
 	
+	public void playWithEntityManager() {
+		Course course1 = Course.builder().name("Web Services in 100 Steps 1").build();
+		em.persist(course1);	
+		
+		Course course2 = Course.builder().name("Angular Js in 100 Steps 2").build();
+		em.persist(course2);
+		
+		Course course3 = Course.builder().name("Node Js in 100 Steps 3").build();
+		
+		em.persist(course3);
+		
+		em.flush();
+		
+
+		course1.setName("Web Services in 100 Steps - Updated");
+		course2.setName("Angular Js in 100 Steps - Updated");
+		
+		em.refresh(course1);
+		
+		em.flush();
+		
+		
+	}
+	
 }

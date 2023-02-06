@@ -66,4 +66,11 @@ class CourseRepositoryTest {
 		assertEquals(name, selectedCourse.getName());
 		
 	}
+	
+	@Test
+	@DirtiesContext
+	public void playWithEntityManager() {
+		repository.playWithEntityManager();
+	}
+
 }

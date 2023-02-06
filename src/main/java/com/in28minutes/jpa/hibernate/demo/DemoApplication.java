@@ -25,12 +25,13 @@ public class DemoApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		selectCourse();
+		//selectCourse();
 		
-		deleteCourse();
+		//deleteCourse();
 		
-		saveCourse();
-		//Course selectedCourse 
+		//saveCourse();
+		
+		//playWithEntityManager();
 	}
 	
 	public void selectCourse() {
@@ -49,6 +50,10 @@ public class DemoApplication implements CommandLineRunner{
 		Course savedCourse = courseRepository.save(course);
 		logger.info("savedCourse : {}", savedCourse);
 		
+	}
+	
+	public void playWithEntityManager() {
+		courseRepository.playWithEntityManager();
 	}
 
 }
