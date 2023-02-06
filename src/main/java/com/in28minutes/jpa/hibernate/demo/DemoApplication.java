@@ -31,7 +31,7 @@ public class DemoApplication implements CommandLineRunner{
 		
 		//saveCourse();
 		
-		//playWithEntityManager();
+		playWithEntityManager();
 	}
 	
 	public void selectCourse() {

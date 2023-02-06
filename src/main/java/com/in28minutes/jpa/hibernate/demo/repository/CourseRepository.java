@@ -60,7 +60,8 @@ public class CourseRepository {
 		
 		em.flush();
 		
-		
+		Course course4 = Course.builder().name("Vue Js in 100 Steps 4").build();
+		em.persist(course4);
 	}
 	
 }
