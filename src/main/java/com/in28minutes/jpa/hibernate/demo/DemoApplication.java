@@ -1,5 +1,9 @@
 package com.in28minutes.jpa.hibernate.demo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.in28minutes.jpa.hibernate.demo.entity.Course;
+import com.in28minutes.jpa.hibernate.demo.entity.Review;
 import com.in28minutes.jpa.hibernate.demo.repository.CourseRepository;
 import com.in28minutes.jpa.hibernate.demo.repository.StudentRepository;
 
@@ -37,7 +42,18 @@ public class DemoApplication implements CommandLineRunner{
 		
 		//playWithEntityManager();
 		
-		studentRepository.saveStudentWithPassport();
+		//studentRepository.saveStudentWithPassport();
+		
+		//courseRepository.addHardcodedReviewsForCourse();
+		
+		
+		courseRepository.addReviewsForCourse(10003L, 
+				Arrays.asList(
+						  Review.builder().rating("5").description("1").build()
+						, Review.builder().rating("6").description("2").build()
+						)
+				);
+		
 	}
 	
 	public void selectCourse() {
