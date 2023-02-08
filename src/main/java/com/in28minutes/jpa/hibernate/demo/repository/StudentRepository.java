@@ -1,11 +1,14 @@
 package com.in28minutes.jpa.hibernate.demo.repository;
 
+import java.util.Arrays;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.in28minutes.jpa.hibernate.demo.entity.Course;
 import com.in28minutes.jpa.hibernate.demo.entity.Passport;
 import com.in28minutes.jpa.hibernate.demo.entity.Student;
 
@@ -77,4 +80,39 @@ public class StudentRepository {
 		student.setName("Ranga - updated");
 		//Persistence Context (student++ , passport++)
 	}
+	
+	public void insertHardcodedStudentAndCourse(){
+		Student student = Student.builder()
+				.name("Jack")
+				.build();	
+		
+		Course course = Course.builder()
+				.name("Microservices in 100 Steps")
+				.build();
+		em.persist(student);
+		em.persist(course);
+		
+		logger.info("student : {}", student);
+		logger.info("course : {}", course);
+		
+		student.setCourses(Arrays.asList(course));
+		course.setStudents(Arrays.asList(student));
+		
+		
+		em.persist(student);
+		em.persist(course);
+	}
+	
+	public void insertStudentAndCourse(Student student, Course course){
+		student.setCourses(Arrays.asList(course));
+		course.setStudents(Arrays.asList(student));
+		
+		logger.info("student : {}", student);
+		logger.info("course : {}", course);
+		
+		
+		em.persist(student);
+		em.persist(course);
+	}
+	
 }

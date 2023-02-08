@@ -95,11 +95,15 @@ public class CourseRepository {
 		Course selectedCourse = findById(courseId);
 		logger.info("course : {}", selectedCourse);
 		//logger.info("reviews : {}", selectedCourse.getReviews());
-//		for(Review review : reviews) {
-//			selectedCourse.addReview(review);
-//			review.setCourse(selectedCourse);
-//			em.persist(review);
-//		}
+		
+		for(Review review : reviews) {
+			selectedCourse.addReview(review);
+			review.setCourse(selectedCourse);
+			em.persist(review);
+		}
+		
 	}
+	
+	
 
 }

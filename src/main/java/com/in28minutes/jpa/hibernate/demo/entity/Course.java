@@ -9,9 +9,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
@@ -58,6 +58,9 @@ public class Course {
 	@OneToMany(mappedBy="course")
 	private List<Review> reviews = new ArrayList();
 	
+	@ManyToMany(mappedBy="courses")
+	private List<Student> students = new ArrayList();
+	
 	@Override
 	public String toString() {
 		return String.format(
@@ -72,5 +75,9 @@ public class Course {
 
 	public void removeReview(Review review) {
 		this.reviews.remove(review);
+	}
+	
+	public void addStudent(Student student) {
+		this.students.add(student);
 	}
 }

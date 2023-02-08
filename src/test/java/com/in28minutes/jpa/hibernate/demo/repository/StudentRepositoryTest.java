@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.in28minutes.jpa.hibernate.demo.DemoApplication;
+import com.in28minutes.jpa.hibernate.demo.entity.Course;
 import com.in28minutes.jpa.hibernate.demo.entity.Passport;
 import com.in28minutes.jpa.hibernate.demo.entity.Student;
 
@@ -26,28 +27,27 @@ public class StudentRepositoryTest {
 
 	@Autowired
 	StudentRepository repository;
-	
+
 	@Autowired
 	EntityManager em;
 
-	//Session & Session Factory
-	//EntityManager & Persistence Context
-	//Transaction
-	
+	// Session & Session Factory
+	// EntityManager & Persistence Context
+	// Transaction
+
 	@Test
 	public void someTest() {
 		repository.someOperationToUnderstandPersistenceContext();
 	}
-	
+
 	@Test
 	@Transactional
 	public void retrieveStudentAndPassportDetails() {
 		Student student = em.find(Student.class, 20001L);
 		logger.info("student -> {}", student);
-		logger.info("passport -> {}",student.getPassport());
+		logger.info("passport -> {}", student.getPassport());
 	}
-	
-	
+
 	@Test
 	@Transactional
 	@DisplayName("retrievePassportAndAssociatedStudent")
@@ -55,5 +55,17 @@ public class StudentRepositoryTest {
 		Passport passport = em.find(Passport.class, 40001L);
 		logger.info("1 passport -> {}", passport);
 		logger.info("2 student -> {}", passport.getStudent());
+	}
+
+	@Test
+	@Transactional
+	public void retrieveStudentAndCourses() {
+		Student student = em.find(Student.class, 20001L);
+		logger.info("student -> {}", student);
+		logger.info("courses -> {}", student.getCourses());
+		
+		Course course = em.find(Course.class, 10001L);
+		logger.info("course -> {}", course);
+		logger.info("students -> {}", course.getStudents());
 	}
 }

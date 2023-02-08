@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.in28minutes.jpa.hibernate.demo.entity.Course;
 import com.in28minutes.jpa.hibernate.demo.entity.Review;
+import com.in28minutes.jpa.hibernate.demo.entity.Student;
 import com.in28minutes.jpa.hibernate.demo.repository.CourseRepository;
 import com.in28minutes.jpa.hibernate.demo.repository.StudentRepository;
 
@@ -46,12 +47,23 @@ public class DemoApplication implements CommandLineRunner{
 		
 		//courseRepository.addHardcodedReviewsForCourse();
 		
-		
+		/*
 		courseRepository.addReviewsForCourse(10003L, 
 				Arrays.asList(
 						  Review.builder().rating("5").description("1").build()
 						, Review.builder().rating("6").description("2").build()
 						)
+				);
+		*/
+		
+		//studentRepository.insertHardcodedStudentAndCourse();
+		studentRepository.insertStudentAndCourse(
+				Student.builder()
+						.name("jane")
+						.build()
+				, Course.builder()
+					.name("Html/css Master step 100")
+					.build()
 				);
 		
 	}
