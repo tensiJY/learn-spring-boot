@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="review")
@@ -18,6 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@ToString(exclude = {"course"})
 public class Review {
 
 	@Id
@@ -31,11 +33,12 @@ public class Review {
 	@ManyToOne
 	private Course course;
 	
+	/*
 	@Override
 	public String toString() {
 		return String.format(
 				"Review(id=%s, rating=%s, description=%s)"
 				, id, rating, description);
 	}
-
+	*/
 }

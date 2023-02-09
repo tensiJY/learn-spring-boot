@@ -2,10 +2,6 @@ package com.in28minutes.jpa.hibernate.demo.repository;
 
 import java.util.List;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -16,6 +12,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.in28minutes.jpa.hibernate.demo.DemoApplication;
 import com.in28minutes.jpa.hibernate.demo.entity.Course;
+import com.in28minutes.jpa.hibernate.demo.entity.Student;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
 // replaced @RunWith with @ExtendWith
 // replaced SpringRunner.class with SpringExtension.class
@@ -52,6 +53,94 @@ public class JPQLTest {
 
 		logger.info("Select  c  From Course c where name like '%100 Steps'-> {}", resultList);
 		// [Course[Web Services in 100 Steps], Course[Spring Boot in 100 Steps]]
+	}
+
+	
+	@Test
+	public void jpql_courses_without_students() {
+		//	select * from course where id not in (select course_id from student_course)
+		TypedQuery<Course> query = em.createQuery("Select c from Course c where c.students is empty", Course.class);
+		List<Course> resultList = query.getResultList();
+		logger.info("Results -> {}", resultList);
+		// [Course[Spring in 50 Steps]]
+		/*
+			select
+		        c1_0.id,
+		        c1_0.created_date,
+		        c1_0.last_updated_date,
+		        c1_0.name 
+		    from
+		        course c1_0 
+		    where
+		        not exists(select
+		            1 
+		        from
+		            student_course s1_0 
+		        where
+		            c1_0.id=s1_0.course_id)
+		 */
+	}
+	
+	@Test
+	public void jpql_courses_with_atleast_2_students() {
+		TypedQuery<Course> query = em.createQuery("Select c from Course c where size(c.students) >= 2", Course.class);
+		List<Course> resultList = query.getResultList();
+		logger.info("Results -> {}", resultList);
+		//[Course[JPA in 50 Steps]]
+	}
+	
+
+	@Test
+	public void jpql_courses_ordered_by_students() {
+		TypedQuery<Course> query = em.createQuery("Select c from Course c order by size(c.students) desc", Course.class);
+		List<Course> resultList = query.getResultList();
+		logger.info("Results -> {}", resultList);
+	}
+	
+	@Test
+	public void jpql_students_with_passports_in_a_certain_pattern() {
+		TypedQuery<Student> query = em.createQuery("Select s from Student s where s.passport.number like '%1234%'", Student.class);
+		List<Student> resultList = query.getResultList();
+		logger.info("Results -> {}", resultList);
+	}
+
+	//like
+	//BETWEEN 100 and 1000
+	//IS NULL
+	//upper, lower, trim, length
+	
+	//JOIN => Select c, s from Course c JOIN c.students s
+	//LEFT JOIN => Select c, s from Course c LEFT JOIN c.students s
+	//CROSS JOIN => Select c, s from Course c, Student s
+	//3 and 4 =>3 * 4 = 12 Rows
+	@Test
+	public void join(){
+		Query query = em.createQuery("Select c, s from Course c JOIN c.students s");
+		List<Object[]> resultList = query.getResultList();
+		logger.info("Results Size -> {}", resultList.size());
+		for(Object[] result:resultList){
+			logger.info("Course{} Student{}", result[0], result[1]);
+		}
+	}
+
+	@Test
+	public void left_join(){
+		Query query = em.createQuery("Select c, s from Course c LEFT JOIN c.students s");
+		List<Object[]> resultList = query.getResultList();
+		logger.info("Results Size -> {}", resultList.size());
+		for(Object[] result:resultList){
+			logger.info("Course{} Student{}", result[0], result[1]);
+		}
+	}
+
+	@Test
+	public void cross_join(){
+		Query query = em.createQuery("Select c, s from Course c, Student s");
+		List<Object[]> resultList = query.getResultList();
+		logger.info("Results Size -> {}", resultList.size());
+		for(Object[] result:resultList){
+			logger.info("Course{} Student{}", result[0], result[1]);
+		}
 	}
 
 }

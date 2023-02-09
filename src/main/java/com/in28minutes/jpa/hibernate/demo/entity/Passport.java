@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="passport")
@@ -20,6 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString(exclude = {"student"})
 public class Passport {
 
 	@Id
@@ -31,9 +33,11 @@ public class Passport {
 	
 	@OneToOne(fetch=FetchType.LAZY, mappedBy="passport")
 	private Student student;
-
+	
+	/*
 	@Override
 	public String toString() {
 		return String.format("Passport(id=%s, number=%s)", id, number);
 	}
+	*/
 }

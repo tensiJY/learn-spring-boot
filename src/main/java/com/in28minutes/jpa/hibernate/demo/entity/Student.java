@@ -18,6 +18,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="student")
@@ -26,6 +27,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@ToString(exclude= {"courses", "passport"})
 public class Student {
 
 	@Id
@@ -50,9 +52,11 @@ public class Student {
 		this.courses.add(course);
 	}
 	
+	/*
 	@Override
 	public String toString() {
 		return String.format("Student(id=%s, name=%s)", id, name);
 	}
+	*/
 	
 }

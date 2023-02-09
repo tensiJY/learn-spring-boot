@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 
@@ -19,6 +20,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @Getter
 @SuperBuilder
+@ToString
 public abstract class Employee {
 	
 	@Id
@@ -28,9 +30,10 @@ public abstract class Employee {
 	@Column(nullable = false, name="name")
 	private String name;
 	
+	/*
 	@Override
 	public String toString() {
 		return String.format("Employee(id=%s, name=%s)", id, name);
 	}
-
+	*/
 }

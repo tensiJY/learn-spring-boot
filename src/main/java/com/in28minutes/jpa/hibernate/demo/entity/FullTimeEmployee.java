@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @Entity
@@ -15,12 +16,14 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
+@ToString(callSuper = true)
 public class FullTimeEmployee extends Employee{
 
 	private BigDecimal salary;
-	
+	/*
 	@Override
 	public String toString() {
 		return String.format("FullTimeEmployee(id=%s, name=%s, salary=%s)", getId(), getName(), salary);
 	}
+	*/
 }
