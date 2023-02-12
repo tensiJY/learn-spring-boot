@@ -7,6 +7,9 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +38,7 @@ import lombok.Setter;
 					, @NamedQuery(name = "query_get_100_Step_courses", query = "Select  c  From Course c where name like '%100 Steps'")
 			}
 		)
+@Cacheable
 public class Course {
 
 	@Id
@@ -59,6 +63,7 @@ public class Course {
 	private List<Review> reviews = new ArrayList();
 	
 	@ManyToMany(mappedBy="courses")
+	@JsonIgnore
 	private List<Student> students = new ArrayList();
 	
 	@Override

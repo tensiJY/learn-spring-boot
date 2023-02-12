@@ -69,7 +69,7 @@ public class DemoApplication implements CommandLineRunner{
 					.build()
 				);
 		*/
-		
+		/*
 		employeeRepository.insert(
 				PartTimeEmployee.builder()
 				.name("Jill")
@@ -91,6 +91,7 @@ public class DemoApplication implements CommandLineRunner{
 		
 		logger.info("Part Time Employees -> {}", 
 				employeeRepository.retrieveAllPartTimeEmployees());
+		*/
 	}
 	
 	public void selectCourse() {
