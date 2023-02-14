@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.in28minutes.jpa.hibernate.demo.DemoApplication;
+import com.in28minutes.jpa.hibernate.demo.entity.Address;
 import com.in28minutes.jpa.hibernate.demo.entity.Course;
 import com.in28minutes.jpa.hibernate.demo.entity.Passport;
 import com.in28minutes.jpa.hibernate.demo.entity.Student;
@@ -46,6 +47,14 @@ public class StudentRepositoryTest {
 		Student student = em.find(Student.class, 20001L);
 		logger.info("student -> {}", student);
 		logger.info("passport -> {}", student.getPassport());
+	}
+	
+	@Test
+	@Transactional
+	public void setAddressDetails() {
+		Student student = em.find(Student.class, 20001L);
+		student.setAddress(Address.builder().city("Hyderabad").line1("No 101").line2("Some Street").build());
+		em.flush();
 	}
 
 	@Test

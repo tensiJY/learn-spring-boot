@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -36,6 +37,9 @@ public class Student {
 
 	@Column(nullable = false)
 	private String name;
+	
+	@Embedded
+	private Address address;
 	
 	//@OneToOne
 	@OneToOne(fetch=FetchType.LAZY)

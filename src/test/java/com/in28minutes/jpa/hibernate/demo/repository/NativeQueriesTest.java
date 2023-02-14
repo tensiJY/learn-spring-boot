@@ -28,9 +28,10 @@ public class NativeQueriesTest {
 	@Autowired
 	EntityManager em;
 
+	//	native query는 where이 적용되지 않으므로 추가해줘야 한다
 	@Test
 	public void native_queries_basic() {
-		Query query = em.createNativeQuery("SELECT * FROM COURSE", Course.class);
+		Query query = em.createNativeQuery("SELECT * FROM COURSE where is_deleted = false", Course.class);
 		List resultList = query.getResultList();
 		logger.info("SELECT * FROM COURSE  -> {}", resultList);
 		//SELECT * FROM COURSE  -> [Course[Web Services in 100 Steps], Course[JPA in 50 Steps - Updated], Course[Spring in 50 Steps], Course[Spring Boot in 100 Steps]]

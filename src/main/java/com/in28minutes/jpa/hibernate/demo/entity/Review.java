@@ -1,6 +1,8 @@
 package com.in28minutes.jpa.hibernate.demo.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -26,7 +28,8 @@ public class Review {
 	@GeneratedValue
 	private Long id;
 
-	private String rating;
+	@Enumerated(EnumType.STRING)
+	private ReviewRating rating;
 
 	private String description;
 	

@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,12 +20,14 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PreRemove;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="course")
@@ -32,13 +36,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@NamedQueries(
-			value= {
-					  @NamedQuery(name = "query_get_all_courses", query = "Select  c  From Course c")
-					, @NamedQuery(name = "query_get_100_Step_courses", query = "Select  c  From Course c where name like '%100 Steps'")
-			}
-		)
+@NamedQueries(value = { 
+		@NamedQuery(name = "query_get_all_courses", 
+				query = "Select  c  From Course c"),		
+		@NamedQuery(name = "query_get_all_courses_join_fetch", 
+		query = "Select  c  From Course c JOIN FETCH c.students s"),		
+		@NamedQuery(name = "query_get_100_Step_courses", 
+		query = "Select  c  From Course c where name like '%100 Steps'") })
 @Cacheable
+@SQLDelete(sql="update course set is_deleted = true where id=?")
+@Where(clause="is_deleted = false")
+@ToString(exclude = {
+		"reviews", "students"
+})
 public class Course {
 
 	@Id
@@ -66,6 +76,16 @@ public class Course {
 	@JsonIgnore
 	private List<Student> students = new ArrayList();
 	
+	@Column(name="is_deleted")
+	@Builder.Default
+	private boolean isDeleted = false;
+	
+	@PreRemove
+	private void preRemove() {
+		this.isDeleted = true;
+	}
+	
+	/*
 	@Override
 	public String toString() {
 		return String.format(
@@ -73,6 +93,7 @@ public class Course {
 				, id, name, lastUpdatedDate, createdDate
 				);
 	}
+	*/
 	
 	public void addReview(Review review) {
 		this.reviews.add(review);
